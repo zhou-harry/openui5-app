@@ -1,7 +1,7 @@
 {
 	"_version": "1.12.0",
 	"sap.app": {
-		"id": "sap.ui.demo.todo",
+		"id": "harry",
 		"type": "application"
 	},
 	"sap.ui5": {
@@ -13,7 +13,7 @@
 			}
 		},
 		"rootView": {
-			"viewName": "sap.ui.demo.todo.view.App",
+			"viewName": "harry.view.App",
 			"type": "XML",
 			"async": true,
 			"id": "app"
@@ -22,7 +22,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "sap.ui.demo.todo.i18n.i18n"
+					"bundleName": "harry.i18n.i18n"
 				}
 			},
 			"": {
@@ -36,6 +36,46 @@
 					"uri": "css/styles.css"
 				}
 			]
+		},
+	  	"routing": {
+		  "config": {
+			"routerClass": "sap.m.routing.Router",
+			"controlId": "appControl",
+			"viewType": "XML",
+			"controlAggregation": "pages",
+			"viewPath": "harry.view",
+			"async": true,
+			"bypassed": {
+			  "target": "login"
+			}
+		  },
+		  "routes": [
+			{
+			  "pattern": "",
+			  "name": "index",
+			  "target": "login"
+			},
+			{
+			  "pattern": "login",
+			  "name": "login",
+			  "target": "login"
+			},
+			{
+			  "pattern": "todo",
+			  "name": "todo",
+			  "target": "todo"
+			}
+		  ],
+		  "targets": {
+			"todo": {
+			  "viewId": "todo",
+			  "viewName": "Todo"
+			},
+			"login": {
+			  "viewId": "login",
+			  "viewName": "login.Login"
+			}
+		  }
 		}
 	}
 }
