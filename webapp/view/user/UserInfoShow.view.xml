@@ -1,0 +1,243 @@
+<core:View xmlns:core="sap.ui.core"
+		   xmlns="sap.m"
+		   xmlns:l="sap.ui.layout"
+		   xmlns:f="sap.f"
+		   controllerName="harry.controller.user.UserList" xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<ScrollContainer
+			height="{=${v>/height}-30}px"
+			width="100%"
+			horizontal="true"
+			vertical="true"
+			focusable="true">
+		<l:BlockLayout id="BlockLayout" background="Dashboard">
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell title="{info>/name}">
+					<FlexBox direction="Column" justifyContent="Center">
+						<items>
+							<f:Avatar id="preview" src="{info>/preview}" displaySize="L"
+									  class="sapUiSmallMarginBottom"/>
+							<List width="100%">
+								<items>
+									<CustomListItem class="sapUiSmallMarginBottom">
+										<Text id="sign" text="{info>/sign}"/>
+									</CustomListItem>
+									<CustomListItem class="sapUiSmallMarginBottom">
+										<HBox>
+											<VBox width="40%">
+												<Label text="性别：" labelFor="g" design="Bold"/>
+											</VBox>
+											<VBox>
+												<Text id="g"
+													  text="{
+															path: 'info>/gender',
+															formatter: '.formatter.genderText'
+														}"/>
+											</VBox>
+										</HBox>
+									</CustomListItem>
+									<CustomListItem class="sapUiSmallMarginBottom">
+										<HBox>
+											<VBox width="40%">
+												<Label text="生日：" labelFor="b" design="Bold"/>
+											</VBox>
+											<VBox>
+												<Text id="b" text="{info>/birth}"/>
+											</VBox>
+										</HBox>
+									</CustomListItem>
+									<CustomListItem class="sapUiSmallMarginBottom">
+										<HBox>
+											<VBox width="40%">
+												<Label text="身高(cm)：" labelFor="h" design="Bold"/>
+											</VBox>
+											<VBox>
+												<Text id="h" text="{info>/height}"/>
+											</VBox>
+										</HBox>
+									</CustomListItem>
+									<CustomListItem class="sapUiSmallMarginBottom">
+										<HBox>
+											<VBox width="40%">
+												<Label text="体重(kg)：" labelFor="w" design="Bold"/>
+											</VBox>
+											<VBox>
+												<Text id="w" text="{info>/weight}"/>
+											</VBox>
+										</HBox>
+									</CustomListItem>
+									<CustomListItem class="sapUiSmallMarginBottom">
+										<HBox>
+											<VBox width="40%">
+												<Label text="城市：" labelFor="c" design="Bold"/>
+											</VBox>
+											<VBox>
+												<Text id="c" text="{info>/cityName}"/>
+											</VBox>
+										</HBox>
+									</CustomListItem>
+									<CustomListItem class="sapUiSmallMarginBottom">
+										<HBox>
+											<VBox width="40%">
+												<Label text="感情状态：" labelFor="affective" design="Bold"/>
+											</VBox>
+											<VBox>
+												<Text id="affective" text="{
+															path: 'info>/affective',
+															formatter: '.formatter.affectiveText'
+														}"/>
+											</VBox>
+										</HBox>
+									</CustomListItem>
+									<CustomListItem class="sapUiSmallMarginBottom">
+										<HBox>
+											<VBox width="40%">
+												<Label text="我的标签：" labelFor="mytags" design="Bold"/>
+											</VBox>
+											<VBox>
+												<Tokenizer width="100%"
+														   tokens="{
+													path: 'mytags>/'
+												}">
+													<Token key="{mytags>tag}" text="{mytags>tagName}" editable="false"/>
+												</Tokenizer>
+											</VBox>
+										</HBox>
+									</CustomListItem>
+									<CustomListItem>
+										<Button text="编辑" press="handleInfoEdit" width="100%"
+												icon="sap-icon://edit"/>
+									</CustomListItem>
+								</items>
+							</List>
+						</items>
+					</FlexBox>
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell title="择友档案" width="2">
+					<List width="100%">
+						<items>
+							<CustomListItem class="sapUiSmallMarginBottom">
+								<HBox>
+									<VBox width="30%">
+										<Label text="性别：" labelFor="favo_gender" design="Bold"/>
+									</VBox>
+									<VBox>
+										<Text id="favo_gender"
+											  text="{
+													path: 'favo>/gender',
+													formatter: '.formatter.genderText'
+												}"/>
+									</VBox>
+								</HBox>
+							</CustomListItem>
+							<CustomListItem class="sapUiSmallMarginBottom">
+								<HBox>
+									<VBox width="30%">
+										<Label text="年龄：" labelFor="age" design="Bold"/>
+									</VBox>
+									<VBox>
+										<Text id="age" text="{favo>/ageStart}~{favo>/ageEnd}"/>
+									</VBox>
+								</HBox>
+							</CustomListItem>
+							<CustomListItem class="sapUiSmallMarginBottom">
+								<HBox>
+									<VBox width="30%">
+										<Label text="身高：" labelFor="height" design="Bold"/>
+									</VBox>
+									<VBox>
+										<Text id="height" text="{favo>/hStart}~{favo>/hEnd}"/>
+									</VBox>
+								</HBox>
+							</CustomListItem>
+							<CustomListItem class="sapUiSmallMarginBottom">
+								<HBox>
+									<VBox width="30%">
+										<Label text="体重：" labelFor="weight" design="Bold"/>
+									</VBox>
+									<VBox>
+										<Text id="weight" text="{favo>/wStart}~{favo>/wEnd}"/>
+									</VBox>
+								</HBox>
+							</CustomListItem>
+							<CustomListItem class="sapUiSmallMarginBottom">
+								<HBox>
+									<VBox width="30%">
+										<Label text="星座：" labelFor="cx" design="Bold"/>
+									</VBox>
+									<VBox>
+										<Text id="cx" text="{favo>/cx}"/>
+									</VBox>
+								</HBox>
+							</CustomListItem>
+							<CustomListItem class="sapUiSmallMarginBottom">
+								<HBox>
+									<VBox width="30%">
+										<Label text="居住城市：" labelFor="city" design="Bold"/>
+									</VBox>
+									<VBox>
+										<Text id="city" text="{favo>/cityName}"/>
+									</VBox>
+								</HBox>
+							</CustomListItem>
+							<CustomListItem>
+								<VBox width="30%">
+									<Label text="择友标签：" labelFor="mytags" design="Bold"/>
+								</VBox>
+								<Tokenizer
+										tokens="{
+									path: 'favo>/tags'
+								}">
+									<Token key="{favo>tag}" text="{favo>tagName}" editable="false"/>
+								</Tokenizer>
+							</CustomListItem>
+						</items>
+					</List>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+
+			<l:BlockLayoutRow class="sapUiSmallMarginBottom">
+				<l:BlockLayoutCell title="Image View" width="3">
+					<UploadCollection class="sapUiSmallMarginBottom"
+									  uploadEnabled="true"
+									  maximumFilenameLength="55"
+									  maximumFileSize="10"
+									  multiple="true"
+									  uploadUrl="{info>/uploadUrl}"
+									  items="{
+						path: 'images>/',
+						templateShareable: false
+					}"
+									  noDataDescription="Drop files or use the &quot;+&quot; button for pending upload"
+									  change="onChange"
+									  fileDeleted="onFileDeleted"
+									  filenameLengthExceed="onFilenameLengthExceed"
+									  fileSizeExceed="onFileSizeExceed"
+									  typeMissmatch="onTypeMissmatch"
+									  uploadComplete="onUploadComplete"
+									  beforeUploadStarts="onBeforeUploadStarts"
+									  selectionChange="onSelectChange">
+						<toolbar>
+							<OverflowToolbar>
+								<ToolbarSpacer/>
+								<Button id="Button" text="上传照片" press="onStartUpload" visible="false"/>
+								<UploadCollectionToolbarPlaceholder/>
+							</OverflowToolbar>
+						</toolbar>
+						<items>
+							<UploadCollectionItem
+									documentId="{images>id}"
+									fileName="{images>fileName}"
+									thumbnailUrl="{images>preview}"
+									url="{images>preview}"
+									enableEdit="false"
+									visibleEdit="false">
+							</UploadCollectionItem>
+						</items>
+					</UploadCollection>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+
+		</l:BlockLayout>
+	</ScrollContainer>
+</core:View>

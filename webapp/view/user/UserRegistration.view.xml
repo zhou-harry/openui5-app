@@ -1,0 +1,58 @@
+<core:View xmlns:core="sap.ui.core" 
+	xmlns="sap.m"
+	xmlns:u="sap.ui.unified"
+	controllerName="harry.controller.user.UserRegistration" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="regid" title="批量注册">
+		<content>
+			<Table id="idProductsTable"
+				inset="false"
+				items="{
+					path: 'infos>/'
+				}">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<Title text="账号批量导入" level="H2"/>
+							<ToolbarSpacer />
+							<u:FileUploader id="fileid" name="files"
+								uploadUrl="{f>/path}" 
+								tooltip="上传excel文件"
+								fileType="xlsx,xls" 
+								sendXHR="true" 
+								maximumFilenameLength="55"
+								maximumFileSize="5" 
+								uploadOnChange="true" 
+								typeMissmatch="handleTypeMissmatch" 
+								fileSizeExceed="handleSizeExceed"
+								uploadComplete="handleUploadComplete">
+								<u:xhrSettings>
+									<u:FileUploaderXHRSettings
+										withCredentials="true" />
+								</u:xhrSettings>
+							</u:FileUploader>
+							<Button id="toggleInfoToolbar"
+								text="开始导入"
+								press="onSubmit" />
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="12em">
+						<Text text="手机号" />
+					</Column>
+					<Column width="12em">
+						<Text text="性别（1=男，2=女）" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{infos>mobile}"/>
+							<Text text="{infos>gender}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</core:View>

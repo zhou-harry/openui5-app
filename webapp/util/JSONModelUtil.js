@@ -70,7 +70,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", 'sap/m/MessageToast'],
 				var pos = curWwwPath.indexOf(":8086" + pathName);
 				var localhostPath = curWwwPath.substring(0, pos);
 //				    return localhostPath+":8081/";
-				return "http://192.168.3.121:8081/";
+				return "http://192.168.3.101:8083/";
 			},
 		});
 		return JSONModelUtil;

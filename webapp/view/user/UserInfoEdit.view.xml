@@ -1,0 +1,195 @@
+<core:View xmlns:core="sap.ui.core"
+		   xmlns="sap.m"
+		   xmlns:l="sap.ui.layout"
+		   xmlns:f1="sap.f"
+		   xmlns:u="sap.ui.unified"
+		   xmlns:f="sap.ui.layout.form"
+		   controllerName="harry.controller.user.UserList"
+		   xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<Page title="用户编辑">
+		<headerContent>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://accept" text="确认" press="handlePressSave"/>
+				<Button icon="sap-icon://decline" text="取消" press="handlePressCancel"/>
+			</Toolbar>
+		</headerContent>
+		<content>
+			<l:BlockLayout id="BlockLayout" background="Dashboard">
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<VBox alignItems="Center" class="sapUiSmallMarginTop">
+							<layoutData>
+								<l:GridData span="L3 M3 S8" linebreakL="true"
+											linebreakM="true" linebreakS="true"/>
+							</layoutData>
+							<f1:Avatar id="preview" src="{info>/preview}"
+									   displaySize="XL" class="sapUiSmallMarginTop"/>
+							<Text text="Upload a photo..." class="sapUiSmallMarginTop"/>
+							<u:FileUploader id="photoid" name="PHOTO"
+											uploadUrl="{f>/path}"
+											tooltip="Upload your file to the server"
+											fileType="png,jpg,gif,bmp"
+											sendXHR="true"
+											maximumFilenameLength="55"
+											maximumFileSize="5"
+											uploadOnChange="true"
+											change="handleFileChange"
+											typeMissmatch="handleTypeMissmatch"
+											fileSizeExceed="handleSizeExceed"
+											uploadComplete="handleUploadComplete">
+								<u:parameters>
+									<u:FileUploaderParameter name="userid" value="{info>/userId}"/>
+								</u:parameters>
+								<u:xhrSettings>
+									<u:FileUploaderXHRSettings
+											withCredentials="true"/>
+								</u:xhrSettings>
+							</u:FileUploader>
+						</VBox>
+					</l:BlockLayoutCell>
+					<l:BlockLayoutCell width="3">
+						<Panel>
+							<headerToolbar>
+								<Toolbar height="3rem">
+									<Title text="{info>/userId}"/>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://edit" text="修改密码" press="handlePasswordEdit"/>
+								</Toolbar>
+							</headerToolbar>
+							<content>
+
+								<f:Form editable="true">
+									<f:layout>
+										<f:ResponsiveGridLayout
+												adjustLabelSpan="false" singleContainerFullSize="false"
+												labelSpanXL="4" labelSpanL="2" labelSpanM="3" labelSpanS="12"
+												emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+												columnsXL="2" columnsL="1" columnsM="1"/>
+									</f:layout>
+									<f:formContainers>
+										<f:FormContainer>
+											<f:formElements>
+												<f:FormElement>
+													<f:label>
+														<Label text="名称" labelFor="name" design="Bold"/>
+													</f:label>
+													<f:fields>
+														<Input id="name" required="true" placeholder="用户名称 ..."
+															   liveChange="handleUseridChange"
+															   value="{path : 'info>/name',type : 'sap.ui.model.type.String',constraints : {minLength: 1,maxLength: 60}}">
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement>
+													<f:label>
+														<Label text="生日" labelFor="birth" design="Bold"/>
+													</f:label>
+													<f:fields>
+														<DatePicker id="birth" placeholder="生日 ..."
+																	value="{info>/birth}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement>
+													<f:label>
+														<Label text="身高" labelFor="height" design="Bold"/>
+													</f:label>
+													<f:fields>
+														<Input id="height" placeholder="身高 ..." type="Number"
+															   valueStateText="请正确输入身高."
+															   value="{path : 'info>/height',type : 'sap.ui.model.type.Number',constraints : {minLength: 2,maxLength: 3}}">
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement>
+													<f:label>
+														<Label text="体重" labelFor="weight" design="Bold"/>
+													</f:label>
+													<f:fields>
+														<Input id="weight" placeholder="体重 ..." type="Number"
+															   valueStateText="请正确输入体重."
+															   value="{path : 'info>/weight',type : 'sap.ui.model.type.Number',constraints : {minLength: 2,maxLength: 3}}">
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement>
+													<f:label>
+														<Label text="城市" labelFor="searchCity" design="Bold"/>
+													</f:label>
+													<f:fields>
+														<SearchField
+																id="searchCity"
+																placeholder="城市..."
+																enableSuggestions="true"
+																value="{info>/cityName}"
+																search="onCitySearch"
+																suggest="onCitySuggest"
+																suggestionItems="{
+																path: 'cities>/',
+																sorter: { path: 'name' }
+															}"
+														>
+															<suggestionItems>
+																<SuggestionItem text="{cities>name}"
+																				key="{cities>code}"/>
+															</suggestionItems>
+														</SearchField>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement>
+													<f:label>
+														<Label text="感情状态" labelFor="affective" design="Bold"/>
+													</f:label>
+													<f:fields>
+														<Select
+																forceSelection="true"
+																selectedKey="{info>/affective}"
+																autoAdjustWidth="true">
+															<core:Item key="0" text="保密"/>
+															<core:Item key="1" text="单身"/>
+															<core:Item key="2" text="热恋"/>
+															<core:Item key="3" text="已婚"/>
+														</Select>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement>
+													<f:label>
+														<Label text="性别" labelFor="gender" design="Bold"/>
+													</f:label>
+													<f:fields>
+														<RadioButtonGroup id="gender" columns="5"
+																		  selectedIndex="{info>/gender}">
+															<buttons>
+																<RadioButton id="RB1" text="未知"/>
+																<RadioButton id="RB2" text="男"/>
+																<RadioButton id="RB3" text="女"/>
+															</buttons>
+														</RadioButtonGroup>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement>
+													<f:label>
+														<Label text="个性签名" labelFor="sign" design="Bold"/>
+													</f:label>
+													<f:fields>
+														<TextArea id="sign" value="{info>/sign}"
+																  placeholder="个性签名..."
+																  growing="true"
+																  growingMaxLines="3"/>
+													</f:fields>
+												</f:FormElement>
+											</f:formElements>
+										</f:FormContainer>
+									</f:formContainers>
+								</f:Form>
+							</content>
+						</Panel>
+
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+		</content>
+	</Page>
+
+</core:View>

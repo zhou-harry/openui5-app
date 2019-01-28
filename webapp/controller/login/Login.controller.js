@@ -17,8 +17,8 @@ sap.ui.define([
 		 * @memberOf harry.controller.Login
 		 */
 		onInit: function () {
-			this.getRouter().getRoute("index").attachMatched(
-				this.onRouteMatched, this);
+			// this.getRouter().getRoute("index").attachMatched(
+			// 	this.onRouteMatched, this);
 
 			var oViewModel = new JSONModel({
 				isPhone: Device.system.phone

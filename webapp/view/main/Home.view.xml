@@ -1,0 +1,16 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="harry.controller.main.Home"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<Panel>
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="主界面"/>
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<Text text="内容页面..."/>
+		</content>
+	</Panel>
+	
+</core:View>

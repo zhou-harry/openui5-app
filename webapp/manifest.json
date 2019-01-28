@@ -64,6 +64,30 @@
 			  "pattern": "todo",
 			  "name": "todo",
 			  "target": "todo"
+			},
+			{
+			  "pattern": "main",
+			  "name": "main",
+			  "target": "main"
+			},
+			{
+			  "pattern": "home",
+			  "name": "home",
+			  "target": "home"
+			},
+			{
+			  "pattern": "UserListMaster",
+			  "name": "userListMaster",
+			  "target": [
+				"userInfoShow",
+				"userInfoEdit",
+				"userListMaster"
+			  ]
+			},
+			{
+			  "pattern": "userRegistration",
+			  "name": "userRegistration",
+			  "target": "userRegistration"
 			}
 		  ],
 		  "targets": {
@@ -74,6 +98,46 @@
 			"login": {
 			  "viewId": "login",
 			  "viewName": "login.Login"
+			},
+			"main": {
+			  "viewId": "main",
+			  "viewName": "main.Main"
+			},
+			"home": {
+			  "viewId": "home",
+			  "viewName": "main.Home",
+			  "parent": "main"
+			},
+			"userListMain": {
+			  "viewId": "userListMain",
+			  "viewName": "user.UserList",
+			  "parent": "main"
+			},
+			"userListMaster": {
+			  "viewId": "userListMaster",
+			  "viewName": "user.UserListMaster",
+			  "controlId": "userListRoot",
+			  "controlAggregation": "masterPages",
+			  "parent": "userListMain"
+			},
+			"userInfoShow": {
+			  "viewId": "userInfoShow",
+			  "viewName": "user.UserInfoShow",
+			  "controlId": "userListRoot",
+			  "controlAggregation": "detailPages",
+			  "parent": "userListMain"
+			},
+			"userInfoEdit": {
+			  "viewId": "userInfoEdit",
+			  "viewName": "user.UserInfoEdit",
+			  "controlId": "userListRoot",
+			  "controlAggregation": "detailPages",
+			  "parent": "userListMain"
+			},
+			"userRegistration": {
+			  "viewId": "userRegistration",
+			  "viewName": "user.UserRegistration",
+			  "parent": "main"
 			}
 		  }
 		}
