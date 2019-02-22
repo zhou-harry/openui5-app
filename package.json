@@ -1,10 +1,11 @@
 {
-  "name": "openui5-sample-app",
+  "name": "openui5-app",
   "version": "0.2.0",
-  "description": "Sample of an OpenUI5 app",
+  "description": "OpenUI5 app",
   "private": true,
   "scripts": {
     "start": "ui5 serve",
+    "debug": "ui5 %NODE_DEBUG_OPTION% serve --port=8087",
     "lint": "eslint webapp",
     "karma": "karma start",
     "karma-ci": "karma start karma-ci.conf.js",

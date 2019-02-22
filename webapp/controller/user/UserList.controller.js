@@ -144,7 +144,6 @@ sap.ui.define([
 		 * 加载照片列表
 		 */
 		_initImages: function (id) {
-
 			this.jsonUtil().loadData(this, "user/images?userid=" + id, function (oData, model) {
 				if (oData.statusCode == this._success) {
 					$.each(oData.data, function (index, ele) {
@@ -281,7 +280,7 @@ sap.ui.define([
 		/**
 		 * 附件上传完成回调
 		 */
-		handleUploadComplete: function (oEvent) {
+		/*handleUploadComplete: function (oEvent) {
 			var sResponse = oEvent.getParameter("responseRaw");
 			var status = oEvent.getParameter("status");
 			if (sResponse) {
@@ -312,7 +311,7 @@ sap.ui.define([
 		handleSizeExceed: function (oEvent) {
 			var max = oEvent.getSource().getMaximumFileSize();
 			MessageToast.show("请上传不超过（" + max + "M）的文件.");
-		},
+		},*/
 		/**
 		 * 保存事件
 		 */
@@ -445,15 +444,15 @@ sap.ui.define([
 			var oUploadCollection = oEvent.getSource();
 			//设置跨域文件上传
 			var fu = oEvent.getSource()._oFileUploader;
-//			fu.setUseMultipart(true);
+			// fu.setUseMultipart(true);
 			fu.setXhrSettings(new FileUploaderXHRSettings({
 				withCredentials: true
 			}))
 			// Header Token
-			oUploadCollection.addHeaderParameter(new UploadCollectionParameter({
-				name: "x-csrf-token",
-				value: "securityTokenFromModel"
-			}));
+			// oUploadCollection.addHeaderParameter(new UploadCollectionParameter({
+			// 	name: "x-csrf-token",
+			// 	value: "securityTokenFromModel"
+			// }));
 		},
 		/**
 		 * 删除附件
@@ -496,6 +495,12 @@ sap.ui.define([
 
 		// Header Setting
 		onBeforeUploadStarts: function (oEvent) {
+			var userId = this.getView().getModel("info").getData().userId;
+			// filaName
+			oEvent.getParameters().addHeaderParameter(new UploadCollectionParameter({
+				name: "userId",
+				value: encodeURI(userId)
+			}));
 			// filaName
 			oEvent.getParameters().addHeaderParameter(new UploadCollectionParameter({
 				name: "fileName",
@@ -511,7 +516,8 @@ sap.ui.define([
 		 * 附件上载完成事件
 		 */
 		onUploadComplete: function (oEvent) {
-			this._initImages();
+			var userId = this.getView().getModel("info").getData().userId;
+			this._initImages(userId);
 		},
 		// 附件操作结束======================================================
 		/**

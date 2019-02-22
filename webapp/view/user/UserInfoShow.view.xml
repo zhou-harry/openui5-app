@@ -205,9 +205,9 @@
 									  multiple="true"
 									  uploadUrl="{info>/uploadUrl}"
 									  items="{
-						path: 'images>/',
-						templateShareable: false
-					}"
+											path: 'images>/',
+											templateShareable: false
+										}"
 									  noDataDescription="Drop files or use the &quot;+&quot; button for pending upload"
 									  change="onChange"
 									  fileDeleted="onFileDeleted"
